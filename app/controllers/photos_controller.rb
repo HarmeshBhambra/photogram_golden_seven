@@ -19,20 +19,20 @@ class PhotosController < ApplicationController
   end
 
   def edit_form
-    i = Photo.find(params[:id])
-    @i = params[:id]
-    @i_source = i.source
-    @i_caption = i.caption
+    @i = Photo.find(params[:id])
+    @i.id = @i.id
+    @i.source = @i.source
+    @i.caption = @i.caption
 
     render("edit_form.html.erb")
   end
 
   def update_form
-    i = Photo.find(params[:id])
+    @i = Photo.find(params[:id])
 
-    i.source = params[:the_source]
-    i.caption = params[:the_caption]
-    i.save
+    @i.source = params[:the_source]
+    @i.caption = params[:the_caption]
+    @i.save
 
     render("show.html.erb")
   end
@@ -40,11 +40,11 @@ class PhotosController < ApplicationController
   def show
     # Parameters: {"id"=>"1"}
 
-    photo_id = Photo.find(params[:id])
+    i = Photo.find(params[:id])
 
-    @photo_source = photo_id.source
+    @i.source = photo_id.source
 
-    @photo_caption = photo_id.caption
+    @i.caption = photo_id.caption
 
     render("show.html.erb")
   end
